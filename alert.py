@@ -10,9 +10,10 @@ RSS_URL_BASE = "https://www.missingkids.org/missingkids/servlet/XmlServlet?act=r
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-s", "--state", type=str, required=False, help="the state to display Amber Alerts for")
+parser.add_argument("--limit", "-l", type=int, help="maximum number of Amber Alerts to display")
 
 args = parser.parse_args()
-
+limit = args.limit
 rss_url = RSS_URL_BASE
 
 if (args.state):
@@ -25,7 +26,12 @@ else:
 
 feed = feedparser.parse(rss_url)
 
+count = 0
+
 for entry in feed.entries:
+    if limit is not None and count >= limit:
+        break
+
     name = entry.title
     published = entry.published
     link = entry.link
@@ -38,3 +44,5 @@ for entry in feed.entries:
     print("\n")
     print("-" * 60)
     print("\n")
+
+    count += 1
