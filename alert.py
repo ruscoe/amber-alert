@@ -9,15 +9,19 @@ RSS_URL_BASE = "https://www.missingkids.org/missingkids/servlet/XmlServlet?act=r
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-s", "--state", type=str, required=True, help="the state to display Amber Alerts for")
+parser.add_argument("-s", "--state", type=str, required=False, help="the state to display Amber Alerts for")
 
 args = parser.parse_args()
 
-state = args.state.upper()
+rss_url = RSS_URL_BASE
 
-rss_url = RSS_URL_BASE + state
+if (args.state):
+    state = args.state.upper()
+    rss_url += state
 
-print(f"Fetching Amber Alerts for {state}\n")
+    print(f"Fetching Amber Alerts for {state}\n")
+else:
+    print("Fetching recent Amber Alerts for all states\n")
 
 feed = feedparser.parse(rss_url)
 
