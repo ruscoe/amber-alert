@@ -2,12 +2,12 @@
 
 A Python script that displays Amber Alerts in the terminal.
 
-# Requirements
+## Requirements
 
 * Python3
 * [feedparser](https://pypi.org/project/feedparser/) (`pip install feedparser`)
 
-# Use
+## Use
 
 Run the script to see recent Amber Alerts.
 
@@ -21,6 +21,6 @@ Pass a number to limit the number of Amber Alerts shown.
 
 `python3 alert.py -s OR -l 2`
 
-# License
+## License
 
 [MIT](https://mit-license.org/)
